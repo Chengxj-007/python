@@ -1,0 +1,60 @@
+class Binary_search:
+    def __init__(self,target,a=[]):
+        self.num = a
+        self.target = target
+
+    def normal_findnum(self):
+        '''
+        基础用法：有序序列中查找某一个数，返回其索引值
+        :return: 目标数字索引，若未找到则返回-1
+        '''
+        left,right = 0, len(self.num)-1  # 注意
+        while (left<=right):  # 注意
+            mid = (left+right)//2
+            if(self.num[mid]==self.target):
+                return mid
+            elif(self.num[mid]>self.target):
+                right = mid - 1
+            elif(self.num[mid]<self.target):
+                left = mid +1
+        return -1
+
+    def advanced_findleft(self):
+        '''
+        高阶用法：寻找有序序列中目标数字的左侧下标n，可以这样理解这个左侧下标n
+                在这个有序序列中，有n个数小于目标数字
+        :return:左侧下标
+        '''
+        left, right = 0, len(self.num)  # 注意
+        while(left<right):  # 注意
+            mid = (left+right)//2
+            if(self.num[mid]==self.target):
+                right = mid   # 注意
+            elif(self.num[mid]<self.target):
+                left = mid+1
+            elif(self.num[mid]>self.target):
+                right = mid
+        return left
+
+    def advanced_findright(self):
+        '''
+        高阶用法：寻找有序序列中目标数字的右侧下标n，可以这样理解这个右侧下标n
+                在这个有序序列中，有n个数大于目标数字
+        :return:右侧下标
+        '''
+        left, right = 0, len(self.num)
+        while(left<right):
+            mid=(left+right)//2
+            if(self.num[mid]==self.target):
+                left = mid+1
+            elif(self.num[mid]>self.target):
+                right = mid
+            elif(self.num[mid]<self.target):
+                left = mid+1
+        return right-1   # 注意
+
+
+test = Binary_search(2,[1,2,2,4])
+print(test.normal_findnum())
+print(test.advanced_findleft())
+print(test.advanced_findright())
